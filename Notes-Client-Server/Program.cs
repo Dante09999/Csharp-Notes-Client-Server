@@ -1,12 +1,11 @@
 using System;
-
-namespace Notes_Client_Server
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+        Settings settings = new Settings();
+
+        Console.WriteLine($"Username: {settings.Username}");
+        Console.WriteLine($"Port: {settings.Port}");
     }
 }
