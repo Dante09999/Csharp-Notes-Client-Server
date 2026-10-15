@@ -3,16 +3,32 @@ class Program
 {
     static void Main(string[] args)
     {
-        Settings settings = new Settings();
+        SettingStore store = new SettingStore();
+        Settings settings = store.Load();
 
-        Console.WriteLine($"Username: {settings.Username}");
+        Console.WriteLine($"Användare: {settings.Username}");
         Console.WriteLine($"Port: {settings.Port}");
 
-        using (FileStream stream = File.Create("settings.json"))
+        Console.Write("Ange ett nytt användarnamn, eller tryck Enter: ");
+        string? newUsername = Console.ReadLine();
+
+        if (!string.IsNullOrWhiteSpace(newUsername))
         {
-            JsonSerializer.Serialize(stream, settings);
+            settings.Username = newUsername;
+
+            try
+            {
+                store.Save(settings);
+                Console.WriteLine("Inställningarna har sparats.");
+            }
+            catch (UnauthorizedAccessException)
+            {
+                Console.WriteLine("Åtkomst till inställningsfilen saknas. Inställningarna kunde inte sparas.");
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("Inställningsfilen kunde inte skrivas. Inställningarna kunde inte sparas.");
+            }   
         }
-        
-        Console.WriteLine("Inställningarna har sparats.");
     }
 }
