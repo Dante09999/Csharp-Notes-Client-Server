@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS Notes
+(
+    Id INTEGER PRIMARY KEY,
+    Text TEXT NOT NULL CHECK (length(trim(Text)) > 0)
+);

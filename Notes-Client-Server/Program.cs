@@ -1,16 +1,21 @@
-using System.Text.Json;
+
 class Program
 {
     static void Main(string[] args)
     {
-        SettingStore store = new SettingStore();
+                SettingStore store = new SettingStore();
         Settings settings = store.Load();
+
+        //förbered databasen
+        NoteRepository repository = new NoteRepository();
+        repository.Initialize();
 
         Console.WriteLine($"Användare: {settings.Username}");
         Console.WriteLine($"Port: {settings.Port}");
 
         Console.Write("Ange ett nytt användarnamn, eller tryck Enter: ");
         string? newUsername = Console.ReadLine();
+        
 
         if (!string.IsNullOrWhiteSpace(newUsername))
         {

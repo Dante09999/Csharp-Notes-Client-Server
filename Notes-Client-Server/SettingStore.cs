@@ -23,7 +23,27 @@ class SettingStore
             using (FileStream stream = File.OpenRead(SettingsFilePath))
             {
                 Settings? settings = JsonSerializer.Deserialize<Settings>(stream);
-                return settings ?? new Settings();
+
+                if (settings == null)
+                {
+                    Console.WriteLine("Inställningsfilen är tom. Standardvärden används.");
+                    return new Settings();
+                }
+
+                if (string.IsNullOrWhiteSpace(settings.Username))
+                {
+                    Console.WriteLine("Användarnamnet i inställningsfilen är tomt. Standardvärden används.");
+                    return new Settings();
+                }
+
+                if (settings.Port <= 0 || settings.Port > 65535)
+                {
+                    Console.WriteLine("Porten i inställningsfilen är ogiltig. Standardvärden används.");
+                    return new Settings();
+                }
+
+                return settings;
+
             }
         }
         catch (JsonException)
