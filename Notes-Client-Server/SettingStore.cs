@@ -3,7 +3,7 @@ class SettingStore
 {
     private const string SettingsFilePath = "settings.json";
 
-        public void Save(Settings settings)
+    public void Save(Settings settings)
     {
         using (FileStream stream = File.Create(SettingsFilePath))
         {
@@ -19,7 +19,7 @@ class SettingStore
             {
                 return new Settings();
             }
-            
+
             using (FileStream stream = File.OpenRead(SettingsFilePath))
             {
                 Settings? settings = JsonSerializer.Deserialize<Settings>(stream);
