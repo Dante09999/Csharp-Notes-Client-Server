@@ -53,6 +53,7 @@ class Program
         {
             repository.Initialize();
         }
+        // Hantera eventuella undantag som kan uppstå vid initialisering av databasen
         catch (Microsoft.Data.Sqlite.SqliteException ex)
         {
             Console.WriteLine($"Databasen kunde inte startas: {ex.Message}");

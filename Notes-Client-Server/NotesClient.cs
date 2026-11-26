@@ -5,9 +5,11 @@ class NotesClient
 {
     public void Start(int port)
     {
+        // Fråga användaren efter ett kommando
         Console.Write("Ange kommando: ");
         string command = Console.ReadLine() ?? "";
 
+        // Skapa en TCP-anslutning till servern
         try
         {
             using TcpClient client = new TcpClient();
@@ -26,6 +28,7 @@ class NotesClient
 
             string? response = reader.ReadLine();
 
+            // Hantera fallet där servern stänger anslutningen utan att skicka ett svar
             if (response == null)
             {
                 Console.WriteLine("Servern stängde anslutningen utan svar.");
@@ -35,6 +38,7 @@ class NotesClient
                 Console.WriteLine($"Svar: {response}");
             }
         }
+        // Hantera eventuella undantag som kan uppstå vid anslutning eller kommunikation
         catch (SocketException)
         {
             Console.WriteLine(

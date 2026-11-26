@@ -46,6 +46,7 @@ class SettingStore
 
             }
         }
+        // Hantera eventuella undantag som kan uppstå vid läsning av filen
         catch (JsonException)
         {
             Console.WriteLine("Inställningsfilen är skadad. Standardvärden används.");

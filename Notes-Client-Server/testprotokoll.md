@@ -12,13 +12,15 @@
 | Okänt id, ta bort | Returnerar false | Returnerade false | Godkänt |
 | Ogiltigt värde | Text med bara mellanslag avvisas | ArgumentException fångades | Godkänt |
 | Databasfel | Saknad Notes-tabell ger ett fel som fångas | SQLite Error 1: no such table: Notes fångades; testet avslutades med kod 0 | Godkänt |
-
 | PING | PONG | PONG | Godkänt |
 | SPARA och HAMTA | Sparad anteckning hämtas i nästa klientanrop | Anteckning med id 8 hämtades | Godkänt |
 | Svenska tecken | åäö bevaras | Svenska tecken återgavs som Unicode-koder i JSON | Godkänt |
 | Tom SPARA | ERR INVALID_VALUE | ERR INVALID_VALUE | Godkänt |
 | Okänt kommando | ERR UNKNOWN_COMMAND | ERR UNKNOWN_COMMAND | Godkänt |
 | Onåbar server | Begripligt anslutningsfel utan krasch | Kunde inte ansluta. Kontrollera att servern är startad. | Godkänt |
+| Inställningar efter omstart | Sparat användarnamn finns kvar | Sparat användarnamn visades efter omstart | Godkänt |
+| Saknad inställningsfil | User och port 5000 används | Standardvärden användes och en ny fil skapades vid sparning | Godkänt |
+| Skadad inställningsfil | Felmeddelande och standardvärden | Felmeddelande visades, User och port 5000 användes | Godkänt |
 
 De fyra testerna för okänt id och ogiltigt värde verifierades 2026-11-17 genom programkörning med en separat tillfällig databas.
 

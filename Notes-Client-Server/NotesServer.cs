@@ -69,6 +69,7 @@ class NotesServer
                     {
                         writer.WriteLine("ERR UNKNOWN_COMMAND");
                     }
+                // Hantera eventuella undantag som kan uppstå vid databashantering
                 }
                 catch (ArgumentException)
                 {
